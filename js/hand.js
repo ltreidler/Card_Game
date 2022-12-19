@@ -20,7 +20,7 @@ class Hand {
         cardElement.innerText = `${card.rank} \n of \n ${card.suit}`;
         cardElement.classList += 'card';
         cardElement.addEventListener('click', ({target}) => {
-            console.log(g.human());
+            g.human(target.innerText);
         })
         return cardElement;
     }

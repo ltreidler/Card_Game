@@ -76,10 +76,19 @@ class Game {
 
     //if it's a person => 
 
-    human(){
+    human(str){
         console.log(this.hands[0]);
 
         //let them choose their card
+        let chosenCard = str.split(`\nof\n`);
+        let humanCard = {};
+        if (isNaN(Number(chosenCard[0]))){
+            humanCard = new Card(chosenCard[0], chosenCard[1])
+        } else {
+            humanCard = new Card(Number(chosenCard[0]), chosenCard[1]);
+        }
+         
+    
         //check if that card works (give them an error message if not)
             //if they don't have any, make them draw cards until they have one that works
             //render all of those cards
