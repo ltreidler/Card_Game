@@ -17,7 +17,7 @@ class Deck {
                 if(i === 1) val = "Ace";
 
 
-                this.deck.push({rank: val, suit: current})
+                this.deck.push(new Card(val, current));
             }
         }
     }
@@ -38,6 +38,8 @@ class Deck {
     }
 
     deal (numHands, cardsPerHand) {
+        if(cardsPerHand * numHands > this.deck.length) return "error";
+
         let hands = [];
         for (let k=0; k<numHands; k++){
             hands.push([]);
@@ -47,16 +49,28 @@ class Deck {
                 hands[j].push(this.draw());
             }
         }
-        console.log(hands);
         return hands;
     }
 
+    dealOther (hands, cardsPerHand) {
+        if(cardsPerHand * hands.length > this.deck.length) return "error";
 
-
+        for (let i = 0; i<cardsPerHand; i++){
+            for (let hand of hands){
+                hand.addCard(this.draw());
+            }
+        }
+    }
 
 }
 
-const d = new Deck();
+// const d = new Deck();
 
-d.generateCards();
-d.shuffle();
+// const h1 = new Hand();
+// const h2 = new Hand();
+// const h3 = new Hand();
+
+
+// d.generateCards();
+// d.shuffle();
+// d.dealOther([h1,h2,h3],4);
