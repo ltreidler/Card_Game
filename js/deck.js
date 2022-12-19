@@ -37,25 +37,26 @@ class Deck {
         return this.deck.shift();
     }
 
-    deal (numHands, cardsPerHand) {
-        if(cardsPerHand * numHands > this.deck.length) return "error";
+    // deal (numHands, cardsPerHand) {
+    //     if(cardsPerHand * numHands > this.deck.length) return "error";
 
-        let hands = [];
-        for (let k=0; k<numHands; k++){
-            hands.push([]);
-        }
-        for (let i = 0; i<cardsPerHand; i++){
-            for (let j= 0; j<numHands; j++){
-                hands[j].push(this.draw());
-            }
-        }
-        return hands;
-    }
+    //     let hands = [];
+    //     for (let k=0; k<numHands; k++){
+    //         hands.push([]);
+    //     }
+    //     for (let i = 0; i<cardsPerHand; i++){
+    //         for (let j= 0; j<numHands; j++){
+    //             hands[j].push(this.draw());
+    //         }
+    //     }
+    //     return hands;
+    // }
 
-    dealOther (hands, cardsPerHand) {
-        if(cardsPerHand * hands.length > this.deck.length) return "error";
+    deal (hands) {
+        // crazy 8, every player starts the game w/ 5 cards per hand
+        if(5 * hands.length > this.deck.length) return "error";
 
-        for (let i = 0; i<cardsPerHand; i++){
+        for (let i = 0; i<5; i++){
             for (let hand of hands){
                 hand.addCard(this.draw());
             }
