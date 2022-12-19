@@ -3,7 +3,7 @@ class Deck {
 
     }
 
-    deck = [];
+    cardArray = [];
     suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
 
     //populate the deck with an initial array of cards
@@ -17,7 +17,7 @@ class Deck {
                 if(i === 1) val = "Ace";
 
 
-                this.deck.push(new Card(val, current));
+                this.cardArray.push(new Card(val, current));
             }
         }
     }
@@ -25,16 +25,16 @@ class Deck {
     shuffle() {
         let newDeck = [];
 
-        while(this.deck.length > 0) {
-            const card = this.deck.splice((Math.floor(Math.random()*this.deck.length)),1)[0];
+        while(this.cardArray.length > 0) {
+            const card = this.cardArray.splice((Math.floor(Math.random()*this.cardArray.length)),1)[0];
             newDeck.push(card);
         }
 
-        this.deck = newDeck;
+        this.cardArray = newDeck;
     }
 
     draw (){
-        return this.deck.shift();
+        return this.cardArray.shift();
     }
 
     // deal (numHands, cardsPerHand) {
@@ -54,7 +54,7 @@ class Deck {
 
     deal (hands) {
         // crazy 8, every player starts the game w/ 5 cards per hand
-        if(5 * hands.length > this.deck.length) return "error";
+        if(5 * hands.length > this.cardArray.length) return "error";
 
         for (let i = 0; i<5; i++){
             for (let hand of hands){

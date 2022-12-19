@@ -10,8 +10,8 @@ class Hand {
     }
 
     playCard(card) {
-        if(card in cards) return null;
-        return this.cards.splice(cards.indexOf(card), 1);
+        if(card in this.cards) return null;
+        return this.cards.splice(this.cards.indexOf(card), 1);
     }
 
 
