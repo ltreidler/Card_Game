@@ -7,6 +7,7 @@ class Hand {
 
     addCard(card) {
         this.cards.push(card);
+
     }
 
     playCard(card) {
@@ -14,6 +15,20 @@ class Hand {
         return this.cards.splice(this.cards.indexOf(card), 1);
     }
 
+    renderCard(card){
+        let cardElement = document.createElement('div');
+        cardElement.textContent = `${card.rank} of ${card.suit}`;
+        return cardElement;
+    }
+
+
+    render(){
+        debugger;
+        let handElement = document.querySelector(".hand");
+        for (let card of this.cards){
+            handElement.appendChild(this.renderCard(card));
+        }
+    }
 
 }
 

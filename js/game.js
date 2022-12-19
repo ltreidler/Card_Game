@@ -22,6 +22,7 @@ class Game {
         this.deck.generateCards();
         this.deck.shuffle();
         this.deck.deal(this.players());
+        this.hands[0].render();
         this.gameTime();
         this.takeTurns();
 
@@ -123,7 +124,6 @@ class Game {
         }
         return false;
     }
-
 }
 
 const g = new Game(6);
