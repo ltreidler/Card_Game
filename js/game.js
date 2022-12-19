@@ -24,8 +24,8 @@ class Game {
         this.deck.deal(this.players());
         this.hands[0].render();
         this.gameTime();
-        this.takeTurns();
-
+        //wait for a human to click something
+  
     }
     // 2. play game
     // turns up top card. draw function. If it's an 8, put in the middle
@@ -38,20 +38,17 @@ class Game {
 
         this.pile.push(topCard);
         console.log(`The top card is ${topCard.rank} of ${topCard.suit}`);
+        this.renderPile();
 
     }
 
     takeTurns() {
-        //iterate through the hands
-        while(!this.gameOver) {
-            for(let hand of this.hands) {
+        //iterate through the computers' hands one time
+            for(let i = 1; i < this.numHands; i++) {
                 console.log(`Next player`);
                 let validCards = this.checkHand(hand.cards);
-
-                if(!hand.computer) {
-                    //do a separate function for how a human does this
-                    this.human();
-                } else if(validCards === false) {
+                
+                if(validCards === false) {
                     console.log("Need to draw cards");
                     this.drawCards(hand);
                     //once it's true, place that card on the top of the pile and go to the next player
@@ -74,15 +71,30 @@ class Game {
                     this.gameOver = true;
                 }
             }
-
-
-            //this is temporary, just to avoid an infinite loop
-            //this.gameOver = true;
-        }
-
-        return true;
-
     }
+
+
+    //if it's a person => 
+
+    human(){
+        console.log(this.hands[0]);
+
+        //let them choose their card
+        //check if that card works (give them an error message if not)
+            //if they don't have any, make them draw cards until they have one that works
+            //render all of those cards
+        //play that card, add it to the pile
+        //remove that card from their hand
+        //check if they have 0 cards
+        //if yes, the game is over
+        //if no, go to the next person
+
+
+
+
+        //calls take turns at the end
+    }
+
 
     drawCards(hand){
         while(this.deck.cardArray.length>0){
@@ -123,6 +135,16 @@ class Game {
             return validCards;
         }
         return false;
+    }
+
+    renderPile() {
+        let cardElement = document.createElement('div');
+        cardElement.innerText = `${this.pile[0].rank} \n of \n ${this.pile[0].suit}`;
+        cardElement.classList += 'card';
+        
+        const pileSection = document.querySelector('.pile');
+        //pileSection.removeChild();
+        pileSection.appendChild(cardElement);
     }
 }
 

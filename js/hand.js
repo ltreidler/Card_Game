@@ -17,13 +17,16 @@ class Hand {
 
     renderCard(card){
         let cardElement = document.createElement('div');
-        cardElement.textContent = `${card.rank} of ${card.suit}`;
+        cardElement.innerText = `${card.rank} \n of \n ${card.suit}`;
+        cardElement.classList += 'card';
+        cardElement.addEventListener('click', ({target}) => {
+            console.log(g.human());
+        })
         return cardElement;
     }
 
 
     render(){
-        debugger;
         let handElement = document.querySelector(".hand");
         for (let card of this.cards){
             handElement.appendChild(this.renderCard(card));
