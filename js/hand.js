@@ -1,6 +1,6 @@
 class Hand {
-    constructor() {
-
+    constructor(computer = true) {
+        this.computer = computer;
     }
 
     cards = [];
@@ -13,4 +13,16 @@ class Hand {
         if(card in cards) return null;
         return this.cards.splice(cards.indexOf(card), 1);
     }
+
+
 }
+
+/*
+1. check hand (checkHand())
+    1a. if they can't play anything, pick up cards until they can (draw(), then check)
+    1b. play the card, put it on top of the pile, move to the next player
+2. if they do have a card, choose the card to play
+3. place that on top of the deck
+4. go to the next player
+
+*/
