@@ -48,9 +48,8 @@ class Game {
                 if(!hand.computer) {
                     //do a separate function for how a human does this
                     this.human();
-                } else if(this.checkHand(hand) === false) {
-                    //draw cards until checkhand is true
-
+                } else if(this.checkHand(hand.cards) === false) {
+                    this.drawCards(hand);
                     //once it's true, place that card on the top of the pile and go to the next player
                 } else {
                     //choose which of the possible cards randomly (valid cards is returned from this.checkHand)
@@ -72,10 +71,29 @@ class Game {
 
     }
 
-    checkHand(hand) {
+    drawCards(hand){
+        while(this.deck.length>0){
+            let drawnCard=this.deck.draw();
+            if (this.checkHand([drawnCard])){
+                this.pile.unshift(drawnCard);
+                return true;
+            }
+            //draw cards until checkhand is true
+            hand.cards.push(drawnCard);
+        }
+        this.reshuffle();
+        this.drawCards(hand);  
+    }
+
+    reshuffle (){
+        this.deck = this.pile.splice(1);
+        this.deck.shuffle();
+    }
+
+    checkHand(cards) {
         //return an array of the possible cards to play
         let validCards = [];
-        for(let card of hand.cards) {
+        for(let card of cards) {
             if(card.rank === 8) validCards.push(card);
             if(card.rank === this.pile[0].rank) validCards.push(card);
             if(card.suit === this.pile[0].suit) validCards.push(card);
