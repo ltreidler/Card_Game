@@ -33,6 +33,24 @@ class Deck {
         this.deck = newDeck;
     }
 
+    draw (){
+        return this.deck.shift();
+    }
+
+    deal (numHands, cardsPerHand) {
+        let hands = [];
+        for (let k=0; k<numHands; k++){
+            hands.push([]);
+        }
+        for (let i = 0; i<cardsPerHand; i++){
+            for (let j= 0; j<numHands; j++){
+                hands[j].push(this.draw());
+            }
+        }
+        console.log(hands);
+        return hands;
+    }
+
 
 
 
